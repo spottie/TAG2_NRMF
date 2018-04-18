@@ -6,13 +6,14 @@ import java.util.Scanner;
 public class Presentation {
 
     private boolean wrongDirection;
-    private final String NORTH = "north";
-    private final String SOUTH = "south";
-    private final String EAST = "east";
-    private final String WEST = "west";
-    private final String START = "start";
-    private final String HELP = "help";
-    private final String QUIT = "quit";
+    public static final String NORTH = "north";
+    public static final String SOUTH = "south";
+    public static final String EAST = "east";
+    public static final String WEST = "west";
+    public static final String START = "start";
+    public static final String HELP = "help";
+    public static final String QUIT = "quit";
+    
     Scanner scan = new Scanner(System.in);
 
     //System
@@ -54,7 +55,7 @@ public class Presentation {
     //Game
     public void inputStartGameMessage() {
         String input = "";
-        String start = "start";
+        String start = START;
 
         while (!input.equals(start)) {
             System.out.println("Type 'start' when you're ready to start the game! ");
@@ -123,16 +124,16 @@ public class Presentation {
         System.out.println(activeRoomInfo);
     }
 
-    //Command
-    public String inputCommandAllowed() {
-        System.out.println("Type direction in order to move in the dungeon: ");
-        return scan.nextLine();
-    }
+//    //Command
+//    public String inputCommandAllowed() {
+//        System.out.println("Type direction in order to move in the dungeon: ");
+//        return scan.nextLine();
+//    }
 
-    //Command
-    public void errorCommandAllowed() {
-        System.out.println("Invalid input. You can type 'help' for instructions!");
-    }
+//    //Command
+//    public void errorCommandAllowed() {
+//        System.out.println("Invalid input. You can type 'help' for instructions!");
+//    }
 
     //Navigate
     public void errorWrongDirection() {
@@ -140,54 +141,30 @@ public class Presentation {
     }
 
     //***************************************************
-    public void movePlayerInput() {
+    public String inputCommandAllowed() {
 
-        boolean wrongInput = false;
+        while (true) {
 
-        while (!wrongInput) {
-
-            String input = inputCommandAllowed();
+            System.out.println("Type direction in order to move in the dungeon: ");
+            String input = scan.nextLine();
 
             switch (input) {
                 case NORTH:
-                    movePlayerCheckDirection();
-                    wrongInput = true;
-                    break;
+                    return input; 
                 case SOUTH:
-                    movePlayerCheckDirection();
-                    wrongInput = true;
-                    break;
+                    return input;
                 case EAST:
-                    movePlayerCheckDirection();
-                    wrongInput = true;
-                    break;
+                    return input;
                 case WEST:
-                    movePlayerCheckDirection();
-                    wrongInput = true;
-                    break;
+                    return input;
                 case HELP:
-                    showHelp();
-                    wrongInput = true;
-                    break;
+                    return input;
                 case QUIT:
-                    quitGameMessage();
-                    System.exit(0);
-                    break;
+                    return input;
                 default:
-                    errorCommandAllowed();
+                    System.out.println("Invalid input. You can type 'help' for instructions!");
                     break;
             }
         }
-}
-
-public void movePlayerCheckDirection() {
-        if (room == null) {
-            wrongDirection = true;
-            tui.errorWrongDirection();
-        } else {
-            activeRoom = room;
-            wrongDirection = false;
-        }
-    }
-    
+    }    
 }
