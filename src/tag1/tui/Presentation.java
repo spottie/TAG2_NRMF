@@ -5,6 +5,14 @@ import java.util.Scanner;
 
 public class Presentation {
 
+    private boolean wrongDirection;
+    private final String NORTH = "north";
+    private final String SOUTH = "south";
+    private final String EAST = "east";
+    private final String WEST = "west";
+    private final String START = "start";
+    private final String HELP = "help";
+    private final String QUIT = "quit";
     Scanner scan = new Scanner(System.in);
 
     //System
@@ -51,7 +59,7 @@ public class Presentation {
         while (!input.equals(start)) {
             System.out.println("Type 'start' when you're ready to start the game! ");
             input = scan.nextLine();
-            
+
             if (!input.equals(start)) {
                 System.out.println("Invalid input. Type 'start'!");
             }
@@ -131,4 +139,55 @@ public class Presentation {
         System.out.println("Wrong direction! Try again!");
     }
 
+    //***************************************************
+    public void movePlayerInput() {
+
+        boolean wrongInput = false;
+
+        while (!wrongInput) {
+
+            String input = inputCommandAllowed();
+
+            switch (input) {
+                case NORTH:
+                    movePlayerCheckDirection();
+                    wrongInput = true;
+                    break;
+                case SOUTH:
+                    movePlayerCheckDirection();
+                    wrongInput = true;
+                    break;
+                case EAST:
+                    movePlayerCheckDirection();
+                    wrongInput = true;
+                    break;
+                case WEST:
+                    movePlayerCheckDirection();
+                    wrongInput = true;
+                    break;
+                case HELP:
+                    showHelp();
+                    wrongInput = true;
+                    break;
+                case QUIT:
+                    quitGameMessage();
+                    System.exit(0);
+                    break;
+                default:
+                    errorCommandAllowed();
+                    break;
+            }
+        }
+}
+
+public void movePlayerCheckDirection() {
+        if (room == null) {
+            wrongDirection = true;
+            tui.errorWrongDirection();
+        } else {
+            activeRoom = room;
+            wrongDirection = false;
+        }
+    }
+    
 }

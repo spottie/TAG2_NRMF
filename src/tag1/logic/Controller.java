@@ -51,12 +51,17 @@ public class Controller {
     public void game() {
         while (true) {
             tui.separator();
-            player.movePlayer(tui);
+            tui.inputCommandAllowed();
+            //player.movePlayer(tui);
             tui.separator();
             String activeRoomInfo = player.getActiveRoom().toString();
             tui.showRoomInformation(activeRoomInfo);
             winGame();
         }
+    }
+    
+    public void movePlayer(){
+        
     }
     
     public void winGame() {
