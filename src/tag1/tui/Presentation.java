@@ -2,7 +2,6 @@ package tag1.tui;
 
 import java.io.IOException;
 import java.util.Scanner;
-import tag1.logic.Player;
 
 public class Presentation {
 
@@ -25,29 +24,38 @@ public class Presentation {
 
     //Player
     public String inputCreatePlayerName() {
-        System.out.println("Please enter your playername: ");
-        return scan.nextLine();
+        String input = "";
+
+        while (input.isEmpty()) {
+            System.out.println("Please enter your playername: ");
+            input = scan.nextLine();
+
+            if (input.isEmpty()) {
+                System.out.println("Invalid input. Must not be empty!");
+            }
+        }
+
+        return input;
     }
 
     //Player
-    public void errorCreatePlayerName() {
-        System.out.println("Invalid input. Must not be empty!");
-    }
-
-    //Player
-    public void showPlayerInfo(Player player) {
-        System.out.println("Lets begin the game " + player.getName() + "!");
+    public void showPlayerInfo(String playerName) {
+        System.out.println("Lets begin the game " + playerName + "!");
     }
 
     //Game
-    public String inputStartGameMessage() {
-        System.out.println("Type 'start' when you're ready to start the game! ");
-        return scan.nextLine();
-    }
+    public void inputStartGameMessage() {
+        String input = "";
+        String start = "start";
 
-    //Game
-    public void errorStartGameMessage() {
-        System.out.println("Invalid input. Type 'start'!");
+        while (!input.equals(start)) {
+            System.out.println("Type 'start' when you're ready to start the game! ");
+            input = scan.nextLine();
+            
+            if (!input.equals(start)) {
+                System.out.println("Invalid input. Type 'start'!");
+            }
+        }
     }
 
     //Game
@@ -103,8 +111,8 @@ public class Presentation {
     }
 
     //Room
-    public void showRoomInformation(Player player) {
-        System.out.println(player.getCurrentRoom().toString());
+    public void showRoomInformation(String activeRoomInfo) {
+        System.out.println(activeRoomInfo);
     }
 
     //Command

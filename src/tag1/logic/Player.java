@@ -20,7 +20,7 @@ public class Player {
         return name;
     }
 
-    public Room getCurrentRoom() {
+    public Room getActiveRoom() {
         return activeRoom;
     }
 
@@ -28,7 +28,7 @@ public class Player {
         this.name = name;
     }
 
-    public void setCurrentRoom(Room activeRoom) {
+    public void setActiveRoom(Room activeRoom) {
         this.activeRoom = activeRoom;
     }
     
@@ -75,32 +75,4 @@ public class Player {
             wrongDirection = false;
         }
     }
-
-    public String validatePlayerName(Presentation tui) {
-        String input = tui.inputCreatePlayerName();
-
-        while (input.isEmpty()) {
-            tui.errorCreatePlayerName();
-            input = tui.inputCreatePlayerName();
-        }
-
-        return input;
-    }
-
-    public void startGame(Presentation tui) {
-        String input = tui.inputStartGameMessage();
-
-        while (!input.equals(START)) {
-            tui.errorStartGameMessage();
-            input = tui.inputStartGameMessage();
-        }
-    }
-
-    public void winGame(Player player, Presentation tui, String winRoom) {
-        if (player.getCurrentRoom().getName().equals(winRoom)) {
-            tui.winGameMessage();
-            System.exit(0);
-        }
-    }
-
 }

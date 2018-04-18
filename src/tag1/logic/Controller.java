@@ -11,33 +11,58 @@ public class Controller {
     Presentation tui = new Presentation();
 
     public void play() {
-        startInit();
         player();
+        dungeon();
+        information();
+        start();
+        game();
+    }
+    
+    public void player(){
+        tui.separator();
+        String name = tui.inputCreatePlayerName();
+        player.setName(name);
+        tui.separator();
+        String playerName = player.getName();
+        tui.showPlayerInfo(playerName);
     }
 
-    public void startInit() {
-        player.setName(player.validatePlayerName(tui));
+    public void dungeon() {
         tui.separator();
-        tui.showPlayerInfo(player);
+        Room startroom = dungeon.createRoomsInDungeon();
+        player.setActiveRoom(startroom);
+        tui.createRoomsMessage();
+        tui.separator();
+        String activeRoomInfo = player.getActiveRoom().toString();
+        tui.showRoomInformation(activeRoomInfo);
+    }
+    
+    public void information(){
         tui.separator();
         tui.showGameInformation();
         tui.pressEnterToContinue();
+    }
+    
+    public void start(){
         tui.separator();
-        player.startGame(tui);
-        tui.separator();
-        player.setCurrentRoom(dungeon.createRoomsInDungeon());
-        tui.createRoomsMessage();
-        tui.separator();
-        tui.showRoomInformation(player);
+        tui.inputStartGameMessage();
     }
 
-    public void player() {
+    public void game() {
         while (true) {
             tui.separator();
             player.movePlayer(tui);
             tui.separator();
-            tui.showRoomInformation(player);
-            player.winGame(player, tui, WINROOM);
+            String activeRoomInfo = player.getActiveRoom().toString();
+            tui.showRoomInformation(activeRoomInfo);
+            winGame();
+        }
+    }
+    
+    public void winGame() {
+        if (player.getActiveRoom().getName().equals(WINROOM)) {
+            tui.winGameMessage();
+            System.exit(0);
         }
     }
 
