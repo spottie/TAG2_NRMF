@@ -6,6 +6,7 @@ public class Player {
 
     private String name;
     private int health = 100;
+    private int damage = 1;
     private Room activeRoom;
     private boolean wrongDirection;
     private final String NORTH = "north";
@@ -76,5 +77,9 @@ public class Player {
     
     public void increaseHealth(int healthPotion) {
         this.health += healthPotion;
+    }
+    
+    public void increaseDamage(int damage) {
+        this.damage += damage;
     }
 }
