@@ -9,8 +9,8 @@ public abstract class Health_Potion extends Item {
         this.healthPotion = healtPotion;
     }
 
-    public void use(Player p) {
-        
+    public void use(Player p, int healthPotion) {
+        p.increaseHealth(healthPotion);
     }
     
 }

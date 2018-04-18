@@ -73,4 +73,8 @@ public class Player {
             wrongDirection = false;
         }
     }
+    
+    public void increaseHealth(int healthPotion) {
+        this.health += healthPotion;
+    }
 }
