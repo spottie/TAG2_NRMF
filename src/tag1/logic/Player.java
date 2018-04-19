@@ -31,6 +31,10 @@ public class Player {
         return activeRoom;
     }
 
+    public ArrayList<Item> getBackpack() {
+        return backpack;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
