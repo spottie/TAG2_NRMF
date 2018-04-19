@@ -128,6 +128,8 @@ public class Controller {
             case USE:
                 String itemInput = tui.itemInput();
                 player.useItem(itemInput);
+                String playerBackpackNew = player.toString();
+                tui.showPlayerBackpack(playerBackpackNew);
                 break;
             default:
                 break;

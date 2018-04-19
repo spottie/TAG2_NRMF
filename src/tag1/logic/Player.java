@@ -15,6 +15,14 @@ public class Player {
         return name;
     }
 
+    public int getHealth() {
+        return health;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
     public boolean isCorrectRoom() {
         return correctRoom;
     }
@@ -44,22 +52,20 @@ public class Player {
             return true;
         }
     }
-    
-    public void addItemToBackPack(Item item){
-        if(item != null){
+
+    public void addItemToBackPack(Item item) {
+        if (item != null) {
             backpack.add(item);
             activeRoom.setItemPickedUp(item);
         }
     }
-    
+
     public void useItem(String input) {
         for (int item = 0; item < backpack.size(); item++) {
-            if(backpack.get(item).getName().equalsIgnoreCase(input)) {
+            if (backpack.get(item).getName().equalsIgnoreCase(input)) {
                 backpack.get(item).use(this);
                 backpack.remove(item);
-                System.out.println(health + " " +  damage);
-        System.out.println(backpack); 
-                }
+            }
         }
     }
 
@@ -70,13 +76,12 @@ public class Player {
     public void increaseDamage(int damage) {
         this.damage += damage;
     }
-    
+
     @Override
     public String toString() {
-        if(backpack.isEmpty()){
+        if (backpack.isEmpty()) {
             return "Player Backpack: No items";
-        }
-        else{
+        } else {
             String overview = "";
             for (int i = 0; i < backpack.size(); i++) {
                 Item item = backpack.get(i);
