@@ -121,6 +121,9 @@ public class Controller {
                 tui.separator();
                 tui.showPlayerPickedUpItem();
                 tui.separator();
+                String playerBackpack = player.toString();
+                tui.showPlayerBackpack(playerBackpack);
+                tui.separator();
                 break;
             case USE:
                 

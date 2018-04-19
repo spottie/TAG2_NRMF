@@ -69,7 +69,7 @@ public class Player {
             String overview = "";
             for (int i = 0; i < backpack.size(); i++) {
                 Item item = backpack.get(i);
-                overview += item.getName();
+                overview += " " + item.getName();
             }
             return "Player Backpack: " + overview;
         }

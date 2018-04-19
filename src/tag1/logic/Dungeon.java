@@ -2,16 +2,16 @@ package tag1.logic;
 
 public class Dungeon {
 
-    private Room room1 = new Room("Name1", "Description1", new Health_Potion("health_potion"));
+    private Room room1 = new Room("Name1", "Description1", new Health_Potion("Health_potion"));
     private Room room2 = new Room("Name2", "Description2", null);
     private Room room3 = new Room("Name3", "Description3", null);
     private Room room4 = new Room("Name4", "Description4", null);
-    private Room room5 = new Room("Name5", "Description5", new Axe("axe"));
+    private Room room5 = new Room("Name5", "Description5", new Axe("Axe"));
     private Room room6 = new Room("Name6", "Description6", null);
     private Room room7 = new Room("Name7", "Description7", null);
     private Room room8 = new Room("Name8", "Description8", null);
     private Room room9 = new Room("Name9", "Description9", null);
-    private Room room10 = new Room("Name10", "Description10", new Health_Potion("health_potion"));
+    private Room room10 = new Room("Name10", "Description10", new Health_Potion("Health_potion"));
     private Room room11 = new Room("Name11", "Description11", null);
     private Room room12 = new Room("Name12", "Description12", null);
     private Room room13 = new Room("Name13", "Description13", null);
