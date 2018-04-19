@@ -144,4 +144,9 @@ public class Presentation {
     public void showPlayerPickedUpItem(){
         System.out.println("You have picked up an item in this room to your backpack");
     }
+    
+    public String itemInput(){
+        System.out.println("What item do you want to use?");
+        return scan.nextLine();
+    }
 }

@@ -51,6 +51,25 @@ public class Player {
             activeRoom.setItemPickedUp(item);
         }
     }
+    
+    public void useItem(String input) {
+        System.out.println(input);
+        System.out.println(backpack);
+        for (Item item1 : backpack) {
+            
+            if(item1.getName().equalsIgnoreCase(input)) {
+                item1.use(this);
+                if(backpack.size() == 1) {
+                    backpack.clear();
+                }
+                    else {
+                        backpack.remove(item1);
+                System.out.println(health + " " +  damage);
+        System.out.println(backpack); 
+                }
+            }
+        }
+    }
 
     public void increaseHealth(int healthPotion) {
         this.health += healthPotion;

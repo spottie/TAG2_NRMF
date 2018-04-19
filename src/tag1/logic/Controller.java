@@ -126,7 +126,8 @@ public class Controller {
                 tui.separator();
                 break;
             case USE:
-                
+                String itemInput = tui.itemInput();
+                player.useItem(itemInput);
                 break;
             default:
                 break;
