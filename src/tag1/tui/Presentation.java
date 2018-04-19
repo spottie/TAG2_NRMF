@@ -93,6 +93,8 @@ public class Presentation {
         System.out.println("Type 'quit' if you want to stop the game!");
         System.out.println("Type 'help' for having instructions!");
         System.out.println("Type 'start' to start the game!");
+        System.out.println("Type 'pick-up' in order to collect an item!");
+        System.out.println("Type 'use' in order to use the item!");
     }
 
     //Help
