@@ -1,16 +1,19 @@
 package tag1.logic;
 
+import java.util.ArrayList;
 import tag1.tui.Presentation;
 import static tag1.tui.Presentation.EAST;
 import static tag1.tui.Presentation.HELP;
 import static tag1.tui.Presentation.NORTH;
+import static tag1.tui.Presentation.PICK_UP;
 import static tag1.tui.Presentation.QUIT;
 import static tag1.tui.Presentation.SOUTH;
+import static tag1.tui.Presentation.USE;
 import static tag1.tui.Presentation.WEST;
 
 public class Controller {
 
-    private final String WINROOM = "Name21";
+    private final String WINROOM = "Name21"; 
     
     Dungeon dungeon = new Dungeon();
     Player player = new Player();
@@ -38,9 +41,6 @@ public class Controller {
         Room startroom = dungeon.createRoomsInDungeon();
         player.setActiveRoom(startroom);
         tui.createRoomsMessage();
-        tui.separator();
-        String activeRoomInfo = player.getActiveRoom().toString();
-        tui.showRoomInformation(activeRoomInfo);
     }
     
     public void information(){
@@ -52,62 +52,78 @@ public class Controller {
     public void start(){
         tui.separator();
         tui.inputStartGameMessage();
+        tui.separator();
+        String activeRoomInfo = player.getActiveRoom().toString();
+        tui.showRoomInformation(activeRoomInfo);
     }
 
     public void game() {
         while (true) {
             tui.separator();
-            String inputCommand = tui.inputCommandAllowed();
-            movePlayer(inputCommand);
-            //player.movePlayer(tui);
+            player.setCorrectRoom(false);
+            while(!player.isCorrectRoom()){
+                String inputCommand = tui.inputCommandAllowed(commands());
+                commandsDirection(inputCommand);
+            }
             tui.separator();
             String activeRoomInfo = player.getActiveRoom().toString();
             tui.showRoomInformation(activeRoomInfo);
+            String playerBackpack = player.toString();
+            tui.showPlayerBackpack(playerBackpack);
             winGame();
         }
     }
     
-    public void movePlayer(String inputCommand){
+    public void commandsDirection(String inputCommand){
 
         switch (inputCommand) {
             case NORTH:
-                if(player.getActiveRoom().getNorth() == null){
+                if(!player.movePlayer(player.getActiveRoom().getNorth())){
                     tui.errorWrongDirection();
-                }
-                else {
-                    player.setActiveRoom(player.getActiveRoom().getNorth());
                 }
                 break;
             case SOUTH:
-                if(player.getActiveRoom().getSouth() == null){
+                if(!player.movePlayer(player.getActiveRoom().getSouth())){
                     tui.errorWrongDirection();
-                }
-                else {
-                    player.setActiveRoom(player.getActiveRoom().getSouth());
                 }
                 break;
             case EAST:
-                if(player.getActiveRoom().getEast() == null){
+                if(!player.movePlayer(player.getActiveRoom().getEast())){
                     tui.errorWrongDirection();
-                }
-                else {
-                    player.setActiveRoom(player.getActiveRoom().getEast());
                 }
                 break;
             case WEST:
-                if(player.getActiveRoom().getWest() == null){
+                if(!player.movePlayer(player.getActiveRoom().getWest())){
                     tui.errorWrongDirection();
                 }
-                else {
-                    player.setActiveRoom(player.getActiveRoom().getWest());
-                }
                 break;
+            default:
+                commandsOther(inputCommand);
+                break;
+        }
+    }
+    
+    public void commandsOther(String inputCommand){
+        switch (inputCommand) {
             case HELP:
+                tui.separator();
                 tui.showHelp();
+                tui.separator();
                 break;
             case QUIT:
+                tui.separator();
                 tui.quitGameMessage();
+                tui.separator();
                 System.exit(0);
+                break;
+            case PICK_UP:
+                player.addItemToBackPack(player.getActiveRoom().getItem());
+                tui.separator();
+                tui.showPlayerPickedUpItem();
+                tui.separator();
+                break;
+            case USE:
+                
                 break;
             default:
                 break;
@@ -119,6 +135,21 @@ public class Controller {
             tui.winGameMessage();
             System.exit(0);
         }
+    }
+    
+    public ArrayList<String> commands(){
+        ArrayList<String> arrCommands = new ArrayList();
+        
+        arrCommands.add(NORTH);
+        arrCommands.add(SOUTH);
+        arrCommands.add(EAST);
+        arrCommands.add(WEST);
+        arrCommands.add(HELP);
+        arrCommands.add(QUIT);
+        arrCommands.add(PICK_UP);
+        arrCommands.add(USE);
+        
+        return arrCommands;
     }
 
 }

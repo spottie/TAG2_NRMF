@@ -4,10 +4,12 @@ public class Room {
     
     private String name, description;
     private Room east, west, north, south;
+    private Item item;
 
-    public Room(String name, String description) {
+    public Room(String name, String description, Item item) {
         this.name = name;
         this.description = description;
+        this.item = item;
     }
 
     public String getName() {
@@ -29,6 +31,10 @@ public class Room {
     public Room getSouth() {
         return south;
     }
+    
+    public Item getItem() {
+        return item;
+    }
 
     public void setEast(Room east) {
         this.east = east;
@@ -45,9 +51,18 @@ public class Room {
     public void setSouth(Room south) {
         this.south = south;
     }
+    
+    public void setItemPickedUp(Item item) {
+        this.item = null;
+    }
 
     @Override
     public String toString() {
-        return "Room Name: " + name + "\nRoom Description: " + description;
+        if(item == null){
+            return "Room Name: " + name + "\nRoom Description: " + description;
+        }
+        else {
+            return "Room Name: " + name + "\nRoom Description: " + description + "\nRoom Item: " + item.getName();
+        }
     }
 }

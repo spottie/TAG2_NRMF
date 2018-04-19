@@ -1,24 +1,22 @@
 package tag1.logic;
 
-import tag1.tui.Presentation;
+import java.util.ArrayList;
 
 public class Player {
 
     private String name;
     private int health = 100;
     private int damage = 1;
+    private boolean correctRoom;
     private Room activeRoom;
-    private boolean wrongDirection;
-    private final String NORTH = "north";
-    private final String SOUTH = "south";
-    private final String EAST = "east";
-    private final String WEST = "west";
-    private final String START = "start";
-    private final String HELP = "help";
-    private final String QUIT = "quit";
+    private ArrayList<Item> backpack = new ArrayList();
 
     public String getName() {
         return name;
+    }
+
+    public boolean isCorrectRoom() {
+        return correctRoom;
     }
 
     public Room getActiveRoom() {
@@ -29,57 +27,51 @@ public class Player {
         this.name = name;
     }
 
+    public void setCorrectRoom(boolean correctRoom) {
+        this.correctRoom = correctRoom;
+    }
+
     public void setActiveRoom(Room activeRoom) {
         this.activeRoom = activeRoom;
     }
-    
-//    public void movePlayer(String input) {
-//        wrongDirection = true;
-//
-//        while (wrongDirection) {
-//
-//            switch (input) {
-//                case NORTH:
-//                    movePlayerCheckDirection(tui, activeRoom.getNorth());
-//                    break;
-//                case SOUTH:
-//                    movePlayerCheckDirection(tui, activeRoom.getSouth());
-//                    break;
-//                case EAST:
-//                    movePlayerCheckDirection(tui, activeRoom.getEast());
-//                    break;
-//                case WEST:
-//                    movePlayerCheckDirection(tui, activeRoom.getWest());
-//                    break;
-//                case HELP:
-//                    tui.showHelp();
-//                    break;
-//                case QUIT:
-//                    tui.quitGameMessage();
-//                    System.exit(0);
-//                    break;
-//                default:
-//                    tui.errorCommandAllowed();
-//                    break;
-//            }
-//        }
-//    }
 
-    public void movePlayerCheckDirection(Presentation tui, Room room) {
+    public boolean movePlayer(Room room) {
         if (room == null) {
-            wrongDirection = true;
-            tui.errorWrongDirection();
+            return false;
         } else {
             activeRoom = room;
-            wrongDirection = false;
+            correctRoom = true;
+            return true;
         }
     }
     
+    public void addItemToBackPack(Item item){
+        if(item != null){
+            backpack.add(item);
+            activeRoom.setItemPickedUp(item);
+        }
+    }
+
     public void increaseHealth(int healthPotion) {
         this.health += healthPotion;
     }
-    
+
     public void increaseDamage(int damage) {
         this.damage += damage;
+    }
+    
+    @Override
+    public String toString() {
+        if(backpack.isEmpty()){
+            return "Player Backpack: No items";
+        }
+        else{
+            String overview = "";
+            for (int i = 0; i < backpack.size(); i++) {
+                Item item = backpack.get(i);
+                overview += item.getName();
+            }
+            return "Player Backpack: " + overview;
+        }
     }
 }

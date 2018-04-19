@@ -8,6 +8,10 @@ public abstract class Item {
         this.name = name;
     }
     
-    public abstract void use();
+    public String getName() {
+        return name;
+    }
+    
+    public abstract void use(Player player);
  
 }

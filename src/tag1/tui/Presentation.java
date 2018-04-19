@@ -1,11 +1,11 @@
 package tag1.tui;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Presentation {
 
-    private boolean wrongDirection;
     public static final String NORTH = "north";
     public static final String SOUTH = "south";
     public static final String EAST = "east";
@@ -13,6 +13,8 @@ public class Presentation {
     public static final String START = "start";
     public static final String HELP = "help";
     public static final String QUIT = "quit";
+    public static final String PICK_UP = "pick up";
+    public static final String USE = "use";
     
     Scanner scan = new Scanner(System.in);
 
@@ -79,7 +81,7 @@ public class Presentation {
 
     //Game
     public void showGameInformation() {
-        System.out.println("THE DUNGEON GAME...\nIn order to win the game, you must navigate through the dungeon and reach the final boss at room (21).\nYou will need to use the console while playing.\nThe directions you can move ingame is 'north', 'south', 'east' and 'west'.\nYou start at 100 health.\nWrite 'help' for further instructions.\nGood luck fellow!");
+        System.out.println("THE DUNGEON GAME...\nIn order to win the game, you must navigate through the dungeon and reach the final boss at room (21).\nYou will need to use the console while playing.\nThe directions you can move ingame is 'north', 'south', 'east' and 'west'.\nYou start at 100 health and 1 damage.\nWrite 'help' for further instructions.\nGood luck fellow!");
     }
 
     //Game
@@ -95,23 +97,8 @@ public class Presentation {
 
     //Help
     public void showHelp() {
-        System.out.println("Select one of the options below: ");
-        System.out.println("Type '1' for game information ");
-        System.out.println("Type '2' for game commands ");
-        switch (scan.nextLine()) {
-            case "1":
-                showGameInformation();
-                pressEnterToContinue();
-                break;
-            case "2":
-                showGameCommands();
-                pressEnterToContinue();
-                break;
-            default:
-                showGameCommands();
-                pressEnterToContinue();
-                break;
-        }
+        System.out.println("Commands:");
+        showGameCommands();
     }
 
     //Dungeon
@@ -124,47 +111,35 @@ public class Presentation {
         System.out.println(activeRoomInfo);
     }
 
-//    //Command
-//    public String inputCommandAllowed() {
-//        System.out.println("Type direction in order to move in the dungeon: ");
-//        return scan.nextLine();
-//    }
-
-//    //Command
-//    public void errorCommandAllowed() {
-//        System.out.println("Invalid input. You can type 'help' for instructions!");
-//    }
-
     //Navigate
     public void errorWrongDirection() {
         System.out.println("Wrong direction! Try again!");
     }
+    
+    //Navigate
+    public String inputCommandAllowed(ArrayList<String> commands) {
+        
+        String input = "";
 
-    //***************************************************
-    public String inputCommandAllowed() {
-
-        while (true) {
-
+        while (!commands.contains(input)) {
             System.out.println("Type direction in order to move in the dungeon: ");
-            String input = scan.nextLine();
+            input = scan.nextLine();
 
-            switch (input) {
-                case NORTH:
-                    return input; 
-                case SOUTH:
-                    return input;
-                case EAST:
-                    return input;
-                case WEST:
-                    return input;
-                case HELP:
-                    return input;
-                case QUIT:
-                    return input;
-                default:
-                    System.out.println("Invalid input. You can type 'help' for instructions!");
-                    break;
+            if (!commands.contains(input)) {
+                System.out.println("Invalid input. Type 'help' for instructions!");
             }
         }
+        
+        return input;
     }    
+    
+    //Item
+    public void showPlayerBackpack(String backpack){
+        System.out.println(backpack);
+    }
+    
+    //Item
+    public void showPlayerPickedUpItem(){
+        System.out.println("You have picked up an item in this room to your backpack");
+    }
 }

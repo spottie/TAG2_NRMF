@@ -1,16 +1,16 @@
 package tag1.logic;
 
-public abstract class Health_Potion extends Item {
+public class Health_Potion extends Item {
     
-    private int healthPotion;
+    private int healthPotion = 50;
     
-    public Health_Potion(String name, int healtPotion) {
+    public Health_Potion(String name) {
         super(name);
-        this.healthPotion = healtPotion;
     }
 
-    public void use(Player p, int healthPotion) {
-        p.increaseHealth(healthPotion);
+    @Override
+    public void use(Player player) {
+        player.increaseHealth(healthPotion);
     }
     
 }
